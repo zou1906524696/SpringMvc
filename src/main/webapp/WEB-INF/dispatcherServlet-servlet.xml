@@ -10,6 +10,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
  
+ 	<bean name="/input-product-dis" class="com.zzf.springmvc.controller.InputProductController"/>
+ 	<bean name="/save-product-dis" class="com.zzf.springmvc.controller.SaveProductController"/>
  
  
+ 	<bean id="ViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+ 		<property name="prefix" value="/jsp/"/>
+ 		<property name="suffix" value=".jsp"></property>
+ 	</bean>
  </beans>

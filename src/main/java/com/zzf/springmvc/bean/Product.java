@@ -11,7 +11,7 @@ public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String description;
-	private BigDecimal price;
+	private Float price;
 	public String getName() {
 		return name;
 	}
@@ -24,12 +24,18 @@ public class Product implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public BigDecimal getPrice() {
+	/**
+	 * @return the price
+	 */
+	public Float getPrice() {
 		return price;
 	}
-	public void setPrice(BigDecimal price) {
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(Float price) {
 		this.price = price;
 	}
-	
+
 	
 }

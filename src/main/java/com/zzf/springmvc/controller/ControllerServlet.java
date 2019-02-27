@@ -56,7 +56,7 @@ public class ControllerServlet extends HttpServlet{
 				Product product = new Product();
 				product.setName(productForm.getName());
 				product.setDescription(productForm.getDescription());
-				product.setPrice(new BigDecimal(productForm.getPrice()));
+				product.setPrice(Float.parseFloat(productForm.getPrice()));
 				ProductService saveProductAction = new ProductService();
 				saveProductAction.save(product);
 				

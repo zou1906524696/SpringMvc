@@ -59,7 +59,7 @@ public class DispatcherFilter implements Filter {
 			product.setName(productForm.getName());
 			product.setDescription(productForm.getDescription());
 			try {
-				product.setPrice(new BigDecimal(productForm.getPrice()));
+				product.setPrice(Float.parseFloat(productForm.getPrice()));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
