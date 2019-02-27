@@ -11,22 +11,33 @@
 	<h1> Add Product
 	<span>Please use this form to enter product details</span>
 	</h1>
+	${empty requestScope.errors? "": "<P style='color:red'>"
+		+="Error(s)!"
+		+="<ul>"}
+		<!--${requestScope.errors.stream().map( x->" -->
+		<li style='color:red'>"+=x+="</li>
+		<!-- ").toList()} -->
+		${empty requestScope.errors? "": "</ul></p>"} 
+		<br>
 	<label>
 		<span>Product Name:</span>
 		<input id="name" type="text" name="name"
-		placeholder="The complete product name">
+		placeholder ="The complete product name"
+		value="${form.name} "/>
 	</label>
 	
 	<label>
 		<span>Description:</span>
 		<input id="description" type="text" name="description" 
-		placeholder="product description">
+		placeholder ="product description"
+		value="${form.description} "/>
 	</label>
 	
 	<label>
 		<span>Price:</span>
 		<input id="price" type="text" name="price" 
-		placeholder="product price in #.## format">
+		placeholder ="product price in #.## format"
+		value="${form.price} "/>
 	</label>
 	
 	<label>

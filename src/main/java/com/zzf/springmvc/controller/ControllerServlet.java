@@ -2,6 +2,7 @@ package com.zzf.springmvc.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.zzf.springmvc.bean.Product;
 import com.zzf.springmvc.form.ProductForm;
 import com.zzf.springmvc.service.ProductService;
+import com.zzf.springmvc.service.ProductValidator;
 
 @WebServlet(name="ControllerServlet",urlPatterns = {"/input-product","/save-product"})
 public class ControllerServlet extends HttpServlet{
@@ -48,21 +50,24 @@ public class ControllerServlet extends HttpServlet{
 			productForm.setDescription(req.getParameter("description"));
 			productForm.setPrice(req.getParameter("price"));
 			
-			
-			Product product = new Product();
-			product.setName(productForm.getName());
-			product.setDescription(productForm.getDescription());
-			try {
+			ProductValidator productValidator = new ProductValidator();
+			List<String> errors = productValidator.validate(productForm);
+			if(errors.isEmpty()){
+				Product product = new Product();
+				product.setName(productForm.getName());
+				product.setDescription(productForm.getDescription());
 				product.setPrice(new BigDecimal(productForm.getPrice()));
-			} catch (Exception e) {
-				// TODO: handle exception
+				ProductService saveProductAction = new ProductService();
+				saveProductAction.save(product);
+				
+				req.setAttribute("product", product);
+				dispatchUrl = "/jsp/ProductDetails.jsp";
+			}else{
+				req.setAttribute("errors", errors);
+				req.setAttribute("form", productForm);
+				dispatchUrl = "/jsp/ProductForm.jsp";
 			}
-			ProductService saveProductAction = new ProductService();
-			saveProductAction.save(product);
-			
-			req.setAttribute("product", product);
-			dispatchUrl = "/jsp/ProductDetails.jsp";
-			
+	
 		}
 		if(dispatchUrl != null){
 			//resp.sendRedirect("http://www.baidu.com"); 
